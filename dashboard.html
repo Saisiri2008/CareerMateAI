@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareerMate AI - Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 65px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .navbar nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .navbar nav a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .navbar nav a:hover {
+            color: #2563eb;
+        }
+
+        .nav-btn {
+            background: #2563eb;
+            color: white !important;
+            padding: 9px 17px;
+            border-radius: 7px;
+        }
+
+        /* MAIN CONTAINER */
+
+        .container {
+            width: 86%;
+            max-width: 1200px;
+            margin: 28px auto;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            border-radius: 16px;
+            padding: 32px 38px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .hero-label {
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .hero h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 15px;
+            opacity: 0.95;
+            max-width: 650px;
+            line-height: 1.5;
+        }
+
+        .hero-icon {
+            font-size: 65px;
+            margin-right: 20px;
+        }
+
+        /* SECTION HEADING */
+
+        .section-heading {
+            margin-bottom: 16px;
+        }
+
+        .section-heading h2 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .section-heading p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* STAT CARDS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-icon {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .stat-title {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        /* FEATURE CARDS */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .feature-card a {
+            text-decoration: none;
+            color: #2563eb;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* DASHBOARD GRID */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .panel-header h2 {
+            font-size: 18px;
+        }
+
+        .panel-header span {
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 6px 9px;
+            border-radius: 5px;
+        }
+
+        /* CAREER RESULT */
+
+        .career-result {
+            padding: 23px;
+        }
+
+        .career-result small {
+            color: #2563eb;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.8px;
+        }
+
+        .career-result h2 {
+            font-size: 24px;
+            margin: 8px 0;
+            color: #111827;
+        }
+
+        .career-result p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .career-button {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 10px 17px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .career-button:hover {
+            background: #1d4ed8;
+        }
+
+        /* PROGRESS */
+
+        .progress-content {
+            padding: 23px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .progress-info strong {
+            color: #2563eb;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #2563eb;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-note {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .ai-box {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 12px;
+            font-size: 13px;
+            color: #374151;
+            line-height: 1.5;
+            border-radius: 5px;
+        }
+
+        /* PROFILE */
+
+        .profile {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+        }
+
+        .profile-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .profile-item {
+            background: #f8fafc;
+            padding: 13px;
+            border-radius: 7px;
+        }
+
+        .profile-item span {
+            display: block;
+            font-size: 11px;
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+
+        .profile-item strong {
+            font-size: 14px;
+            color: #111827;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 22px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .navbar nav {
+                gap: 10px;
+            }
+
+            .navbar nav a {
+                font-size: 12px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .hero {
+                padding: 25px;
+            }
+
+            .hero h1 {
+                font-size: 25px;
+            }
+
+            .hero-icon {
+                display: none;
+            }
+
+            .stats,
+            .features,
+            .dashboard-grid,
+            .profile-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            CareerMate AI 🤖
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html">Home</a>
+
+            <a href="career.html">Career</a>
+
+            <a href="aptitude.html">Aptitude</a>
+
+            <a href="interview.html">Interview</a>
+
+            <a href="login.html" class="nav-btn">Logout</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <div class="hero-label">
+                    WELCOME TO CAREERMATE AI
+                </div>
+
+                <h1>
+                    Your Career Journey Starts Here
+                </h1>
+
+                <p>
+                    Practice aptitude, prepare for interviews
+                    and discover the right career path for you.
+                </p>
+
+            </div>
+
+            <div class="hero-icon">
+                🤖
+            </div>
+
+        </section>
+
+
+        <!-- QUICK OVERVIEW -->
+
+        <div class="section-heading">
+
+            <h2>
+                Quick Overview
+            </h2>
+
+            <p>
+                Track your preparation at a glance.
+            </p>
+
+        </div>
+
+
+        <div class="stats">
+
+            <!-- APTITUDE -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🧠
+                </div>
+
+                <div class="stat-title">
+                    Aptitude Score
+                </div>
+
+                <div class="stat-value" id="aptitudeScore">
+                    0 / 10
+                </div>
+
+            </div>
+
+
+            <!-- CAREER -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🎯
+                </div>
+
+                <div class="stat-title">
+                    Career Guidance
+                </div>
+
+                <div class="stat-value">
+                    Ready
+                </div>
+
+            </div>
+
+
+            <!-- INTERVIEW -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🎤
+                </div>
+
+                <div class="stat-title">
+                    Interview Preparation
+                </div>
+
+                <div class="stat-value">
+                    Ready
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PREPARATION MODULES -->
+
+        <div class="section-heading">
+
+            <h2>
+                Preparation Modules
+            </h2>
+
+            <p>
+                Build your skills with CareerMate AI.
+            </p>
+
+        </div>
+
+
+        <div class="features">
+
+            <!-- CAREER -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🎯
+                </div>
+
+                <h3>
+                    Career Guidance
+                </h3>
+
+                <p>
+                    Discover suitable career paths
+                    based on your interests and skills.
+                </p>
+
+                <a href="career.html">
+                    Explore Career →
+                </a>
+
+            </div>
+
+
+            <!-- APTITUDE -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🧠
+                </div>
+
+                <h3>
+                    Aptitude Practice
+                </h3>
+
+                <p>
+                    Test your logical reasoning,
+                    mathematics and problem-solving skills.
+                </p>
+
+                <a href="aptitude.html">
+                    Start Practice →
+                </a>
+
+            </div>
+
+
+            <!-- INTERVIEW -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🎤
+                </div>
+
+                <h3>
+                    Interview Preparation
+                </h3>
+
+                <p>
+                    Practice technical and HR interview
+                    questions for placement preparation.
+                </p>
+
+                <a href="interview.html">
+                    Prepare Now →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD GRID -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- CAREER RECOMMENDATION -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        🎯 Career Recommendation
+                    </h2>
+
+                    <span>
+                        AI GUIDANCE
+                    </span>
+
+                </div>
+
+
+                <div class="career-result">
+
+                    <small>
+                        CAREERMATE AI
+                    </small>
+
+                    <h2 id="careerName">
+                        No Recommendation Yet
+                    </h2>
+
+                    <p id="careerDescription">
+                        Complete the Career Guidance questionnaire
+                        to receive your personalized recommendation.
+                    </p>
+
+                    <a href="career.html" class="career-button">
+                        Get Recommendation →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        📊 Preparation Progress
+                    </h2>
+
+                    <span id="progressText">
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="progress-content">
+
+                    <div class="progress-info">
+
+                        <span>
+                            Aptitude Performance
+                        </span>
+
+                        <strong id="progressPercent">
+                            0%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-fill"
+                            id="progressFill">
+                        </div>
+
+                    </div>
+
+
+                    <p class="progress-note">
+
+                        Your aptitude performance contributes
+                        to your current preparation progress.
+
+                    </p>
+
+
+                    <div class="ai-box" id="aiMessage">
+
+                        🤖 Complete the Aptitude Test to receive
+                        personalized preparation feedback.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STUDENT PROFILE -->
+
+        <div class="profile">
+
+            <div class="profile-title">
+                👤 Student Profile
+            </div>
+
+
+            <div class="profile-info">
+
+                <div class="profile-item">
+
+                    <span>
+                        STUDENT
+                    </span>
+
+                    <strong>
+                        CareerMate Student
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>
+                        PREPARATION LEVEL
+                    </span>
+
+                    <strong>
+                        Beginner
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <span>
+                        GOAL
+                    </span>
+
+                    <strong>
+                        Placement Preparation
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        CareerMate AI 🤖
+        <br>
+
+        AI-Powered Career & Placement Preparation Platform
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        /* ============================
+           APTITUDE SCORE
+        ============================ */
+
+        const savedScore =
+            localStorage.getItem("aptitudeScore");
+
+
+        if (savedScore !== null) {
+
+            const score =
+                Number(savedScore);
+
+
+            document.getElementById("aptitudeScore")
+                .textContent = score + " / 10";
+
+
+            const percentage =
+                score * 10;
+
+
+            document.getElementById("progressFill")
+                .style.width = percentage + "%";
+
+
+            document.getElementById("progressPercent")
+                .textContent = percentage + "%";
+
+
+            document.getElementById("progressText")
+                .textContent = percentage + "%";
+
+
+            const aiMessage =
+                document.getElementById("aiMessage");
+
+
+            if (percentage === 100) {
+
+                aiMessage.innerHTML =
+                    "🌟 Excellent! Your aptitude performance is outstanding. Keep preparing for technical and HR interviews.";
+
+            }
+
+            else if (percentage >= 70) {
+
+                aiMessage.innerHTML =
+                    "👏 Great job! Your aptitude preparation is strong. Continue practicing regularly.";
+
+            }
+
+            else if (percentage >= 50) {
+
+                aiMessage.innerHTML =
+                    "👍 Good start! Practice more questions to strengthen your problem-solving skills.";
+
+            }
+
+            else {
+
+                aiMessage.innerHTML =
+                    "📚 Keep practicing! Regular aptitude practice will improve your placement preparation.";
+
+            }
+
+        }
+
+
+        /* ============================
+           CAREER RECOMMENDATION
+        ============================ */
+
+        const savedCareer =
+            localStorage.getItem("careerRecommendation");
+
+
+        const savedDescription =
+            localStorage.getItem("careerDescription");
+
+
+        if (savedCareer) {
+
+            document.getElementById("careerName")
+                .textContent = savedCareer;
+
+
+            document.getElementById("careerDescription")
+                .textContent =
+                savedDescription || "";
+
+        }
+
+    </script>
+
+</body>
+</html>

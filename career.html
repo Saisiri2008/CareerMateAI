@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Career Guidance - CareerMate AI
+    </title>
+
+    <link rel="stylesheet"
+        href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            CareerMate AI 🤖
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html">
+                Home
+            </a>
+
+            <a href="career.html">
+                Career
+            </a>
+
+            <a href="aptitude.html">
+                Aptitude
+            </a>
+
+            <a href="interview.html">
+                Interview
+            </a>
+
+            <a href="login.html"
+                class="nav-btn">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- CAREER GUIDANCE -->
+
+    <section class="career-page">
+
+
+        <div class="page-heading">
+
+            <span>
+                🎯 CAREER GUIDANCE
+            </span>
+
+            <h1>
+                Find Your Suitable Career
+            </h1>
+
+            <p>
+                Tell us about your interests, skills and
+                career goals. CareerMate AI will suggest
+                a suitable career path.
+            </p>
+
+        </div>
+
+
+
+        <!-- CAREER FORM -->
+
+        <div class="career-card">
+
+            <h2>
+                🤖 CareerMate AI
+            </h2>
+
+            <p class="card-subtitle">
+                Answer a few simple questions
+            </p>
+
+
+
+            <!-- INTEREST -->
+
+            <label for="interest">
+                What are you interested in?
+            </label>
+
+            <select id="interest">
+
+                <option value="">
+                    Select your interest
+                </option>
+
+                <option value="coding">
+                    Coding & Technology
+                </option>
+
+                <option value="design">
+                    Design & Creativity
+                </option>
+
+                <option value="business">
+                    Business & Management
+                </option>
+
+                <option value="data">
+                    Mathematics & Data
+                </option>
+
+            </select>
+
+
+
+            <!-- SKILL -->
+
+            <label for="skill">
+                What is your strongest skill?
+            </label>
+
+            <select id="skill">
+
+                <option value="">
+                    Select your skill
+                </option>
+
+                <option value="programming">
+                    Programming
+                </option>
+
+                <option value="communication">
+                    Communication
+                </option>
+
+                <option value="problem">
+                    Problem Solving
+                </option>
+
+                <option value="creative">
+                    Creativity
+                </option>
+
+            </select>
+
+
+
+            <!-- GOAL -->
+
+            <label for="goal">
+                What is your career goal?
+            </label>
+
+            <select id="goal">
+
+                <option value="">
+                    Select your goal
+                </option>
+
+                <option value="developer">
+                    Software Career
+                </option>
+
+                <option value="data">
+                    Data & Analytics
+                </option>
+
+                <option value="design">
+                    Creative Career
+                </option>
+
+                <option value="management">
+                    Management Career
+                </option>
+
+            </select>
+
+
+
+            <!-- BUTTON -->
+
+            <button onclick="getCareerSuggestion()">
+
+                Get Career Suggestion →
+
+            </button>
+
+        </div>
+
+
+
+        <!-- RESULT -->
+
+        <div id="careerResult"
+            class="career-result">
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>
+            CareerMate AI 🤖
+        </h3>
+
+        <p>
+            AI-Based Career Guidance & Placement Preparation
+        </p>
+
+        <p>
+            © 2026 CareerMate AI
+        </p>
+
+    </footer>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function getCareerSuggestion() {
+
+
+            const interest =
+                document.getElementById("interest").value;
+
+
+            const skill =
+                document.getElementById("skill").value;
+
+
+            const goal =
+                document.getElementById("goal").value;
+
+
+            const result =
+                document.getElementById("careerResult");
+
+
+
+            /* CHECK ALL OPTIONS */
+
+            if (
+                interest === "" ||
+                skill === "" ||
+                goal === ""
+            ) {
+
+                result.innerHTML = `
+
+                    <div class="error-message">
+
+                        ⚠️ Please select all the options.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            let career;
+
+            let description;
+
+
+
+            /* CAREER RECOMMENDATION */
+
+            if (
+                interest === "coding" ||
+                skill === "programming"
+            ) {
+
+                career =
+                    "Software Developer 💻";
+
+                description =
+                    "You may enjoy building websites, applications and software systems.";
+
+            }
+
+
+            else if (
+                interest === "data" ||
+                goal === "data"
+            ) {
+
+                career =
+                    "Data Analyst 📊";
+
+                description =
+                    "You may enjoy working with data, statistics and finding useful insights.";
+
+            }
+
+
+            else if (
+                interest === "design" ||
+                skill === "creative"
+            ) {
+
+                career =
+                    "UI/UX Designer 🎨";
+
+                description =
+                    "You may enjoy creating attractive and user-friendly digital experiences.";
+
+            }
+
+
+            else if (
+                interest === "business" ||
+                goal === "management"
+            ) {
+
+                career =
+                    "Business / Management Professional 📈";
+
+                description =
+                    "You may enjoy planning, communication, leadership and business activities.";
+
+            }
+
+
+            else {
+
+                career =
+                    "Software Developer 💻";
+
+                description =
+                    "Software development can be a good career option based on your selected interests.";
+
+            }
+
+
+
+            /* SAVE CAREER TO BROWSER */
+
+            localStorage.setItem(
+                "careerRecommendation",
+                career
+            );
+
+
+            localStorage.setItem(
+                "careerDescription",
+                description
+            );
+
+
+
+            /* SHOW RESULT */
+
+            result.innerHTML = `
+
+                <div class="result-card">
+
+                    <span>
+                        🤖 CAREERMATE AI RECOMMENDATION
+                    </span>
+
+                    <h2>
+                        ${career}
+                    </h2>
+
+                    <p>
+                        ${description}
+                    </p>
+
+                    <div class="recommendation">
+
+                        ✅ Recommended based on your
+                        interests and skills.
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
